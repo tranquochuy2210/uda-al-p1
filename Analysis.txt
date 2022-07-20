@@ -1,0 +1,6 @@
+task 0 : O(n)
+task 1 : O(n^2)
+task 2 : O(n^)
+task 3 : O(n^2)
+task 4 : O(n^2)
+
