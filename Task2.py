@@ -10,13 +10,26 @@ with open('texts.csv', 'r') as f:
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
-    longestCall = None
+    allNumber= {}
     for call in calls:
-        if longestCall is None:
-            longestCall = call
-        elif int(call[3]) > int(longestCall[3]):
-            longestCall = call
-    print(longestCall[0] + " spent the longest time, " + longestCall[3] + " seconds, on the phone during September 2016.")
+        if allNumber.get(call[0], None) is None:
+            allNumber[call[0]] = int(call[3])
+        else:
+            allNumber[call[0]] += int(call[3])
+        if allNumber.get(call[1], None) is None:
+            allNumber[call[1]] = int(call[3])
+        else:
+            allNumber[call[1]] += int(call[3])
+    longestCall = []
+    for key in allNumber:
+        if len(longestCall) == 0:
+            longestCall.append(key)
+            longestCall.append(allNumber[key])
+        elif allNumber[key] > longestCall[1]:
+            longestCall[0] = key
+            longestCall[1] = allNumber[key]
+
+    print(str(longestCall[0]) + " spent the longest time, " + str(longestCall[1]) + " seconds, on the phone during September 2016.")
 
 
 """
